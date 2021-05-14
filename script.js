@@ -1,32 +1,51 @@
-const months = ["January","February","March","April","May","June",
-"July","August","September","October","November","December"];
-
-const week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
- 
-const ids = ["date","day","month","dayNum","year","hour", "minutes", "seconds", "period"]
 
 
+function clock(){
+    var fullDate = new Date();
+var hours = fullDate.getHours();
+var minutes = fullDate.getMinutes();
+var seconds = fullDate.getSeconds();
 
-function updateClock(){
-    var now = new Date()
-    var dname = now.getDay(),
-    mo = now.getMonth(),
-    dnum = now.getDate(),
-    yr = now.getFullYear(),
-    hou = now.getHours(),
-    min = now.getMinutes(),
-    sec = now.getSeconds,
-    pe = 'AM';
+var day= fullDate.getUTCDate();
+var month= fullDate.getUTCMonth() + 1 ;
+var year= fullDate.getFullYear();
 
-    const values = [dname, mo, dnum, yr , hou , min , sec , pe ];
-
-
-    for(i = 0; i<ids.length; i++){
-        document.getElementById(ids[i]).firstChild.nodeValue = values[i];
-    }
+if(hours < 10) {
+    hours = "0" + hours
+}
+if(minutes < 10) {
+    minutes = "0" + minutes
+}
+if(seconds < 10) {
+    seconds = "0" + seconds
+}
+if(day < 10) {
+    day = "0" + day
+}
+if(month < 10) {
+    month = "0" + month
 }
 
-function initClock(){
-    updateClock()
-    window.setInterval("updateClock()", 1)
+if(hours > 12){
+    hours = hours - 12
 }
+
+if(fullDate.getHours() < 12){
+    document.getElementById('timePeriod').innerHTML = 'AM'
+}
+else{
+    document.getElementById('timePeriod').innerHTML = 'PM'
+}
+
+document.getElementById('day').innerHTML = day + ' --'
+document.getElementById('month').innerHTML = month + ' --'
+document.getElementById('year').innerHTML = year;
+
+document.getElementById('hour').innerHTML = hours + '  :'
+document.getElementById('minutes').innerHTML = minutes + '  :'
+document.getElementById('seconds').innerHTML = seconds
+}
+
+setInterval(clock)
+
+console.log(new Date())
